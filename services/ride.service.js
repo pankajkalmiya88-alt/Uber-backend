@@ -1,5 +1,6 @@
 const rideModel = require('../models/ride.model');
 const mapService = require('./maps.service');
+const crypto = require('crypto');
 
 async function getFare(pickup, destination) {
     if (!pickup || !destination) {
@@ -53,21 +54,31 @@ async function getFare(pickup, destination) {
     };
 
     return fare;
+};
+
+function getOtp(num) {
+    function generateOtp(num) {
+        const otp = crypto.randomInt(Math.pow(10, num - 1), Math.pow(10, num)).toString();
+        return otp;
+    }
+
+    return generateOtp(num);
 }
 
 module.exports.createRide = async ({
     user, pickup, destination, vehicleType
 }) => {
 
-    if(!user || !pickup || !destination || !vehicleType) {
+    if (!user || !pickup || !destination || !vehicleType) {
         throw new Error('All fields are required');
     }
 
     const fare = await getFare(pickup, destination);
-    const ride =  rideModel.create({
+    const ride = rideModel.create({
         user,
         pickup,
         destination,
+        otp: getOtp(6),
         fare: fare[vehicleType],
     });
 

@@ -12,6 +12,7 @@ const rideSchema = new mongoose.Schema({
     paymentId: { type: String },
     orderId: { type: String },
     signature: { type: String },
+    otp: { type: String, select: false, required: true },
 }, { timestamps: true });
 
 module.exports = mongoose.model('ride', rideSchema);
