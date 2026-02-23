@@ -20,6 +20,8 @@
     "express-validator": "^7.3.1",
     "jsonwebtoken": "^9.0.3",
     "mongoose": "^9.2.1",
-    "nodemon": "^3.1.11"
+    "nodemon": "^3.1.11",
+    "socket": "^1.1.63",
+    "socket.io": "^4.8.3"
   }
 }
