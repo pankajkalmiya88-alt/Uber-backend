@@ -16,11 +16,11 @@ const captainSchema = new mongoose.Schema({
         plate: { type: String, required: true, minlength: [3, 'Plate must be at least 3 characters long'] },
         capacity: { type: Number, required: true, min: [1, 'Capacity must be at least 1'] },
         vehicleType: { type: String, enum: ['car', 'motorcycle', 'auto'], required: true },
-        location: {
-            ltd: { type: Number },
-            lng: { type: Number }
-        }
     },
+    location: {
+        ltd: { type: Number },
+        lng: { type: Number }
+    }
 });
 
 
@@ -37,6 +37,6 @@ captainSchema.statics.hashPassword = async function (password) {
     return await bcrypt.hash(password, 10)
 };
 
-const captainModel = mongoose.model('captain', captainSchema);  
+const captainModel = mongoose.model('captain', captainSchema);
 
 module.exports = captainModel;

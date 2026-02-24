@@ -12,7 +12,7 @@ module.exports.getAddressCoordinate = async (address) => {
         if (data.status === 'OK' && data.results.length > 0) {
             const location = data.results[0].geometry.location;
             return {
-                lat: location.lat,
+                ltd: location.lat,
                 lng: location.lng
             };
         } else {
@@ -84,10 +84,13 @@ module.exports.getAutocompleteSuggestions = async (input) => {
 };
 
 module.exports.getCaptainsInTheRadius = async (ltd, lng, radius) => {
+
+    // Radius in KM
     const captains = await captainModel.find({
         location: {
             $geoWithin: {
-                $centerSphere: [ [ltd, lng], radius / 3963.2 ]
+                $centerSphere: [ [ltd, lng], radius / 6371 ]
+                // $centerSphere: [ [lng, ltd], radius / 6371 ]
             }
         }
     });
