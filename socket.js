@@ -16,7 +16,6 @@ function initializeSocket(server) {
         console.log(`Socket connected: ${socket.id}`);
 
         socket.on('join', async (data) => {
-            console.log('data: ', data);
             const { userId, userType } = data;
 
             if (userType === 'user') {
